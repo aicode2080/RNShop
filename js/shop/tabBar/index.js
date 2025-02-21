@@ -46,7 +46,7 @@ const icons = [
 export const ShopTab = (p) => {
   const { selectedIndex } = p;
   const [selectIndex, setSelectIndex] = useState(selectedIndex);
-  console.log(icons);
+  // console.log(icons);
   const items = icons?.map((ele, idx) => {
     const { title, selected, unSelect } = ele;
     const uri = selectIndex == idx ? selected : unSelect;

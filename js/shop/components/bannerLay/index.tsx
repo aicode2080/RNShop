@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Linking,
+  Pressable,
+} from 'react-native';
 import { sc375 } from '../../utils/screen';
 
 type laySource = {
   img_url: string;
+  h5_url: string;
 };
 
 interface bannerLayProps {
@@ -16,16 +23,27 @@ export const BannerLay = ({ dataSource }: bannerLayProps) => {
         .filter((o) => o?.img_url)
         ?.map((o, key) => {
           return (
-            <View
+            <Pressable
               key={key}
-              style={{ ...styles.flex, ...styles.direction, height: sc375(30) }}
+              onPress={() => {
+                Linking.openURL(o?.h5_url);
+              }}
             >
-              <Image
-                resizeMode="contain"
-                source={{ uri: o?.img_url }}
-                style={styles.item}
-              />
-            </View>
+              <View
+                key={o.img_url}
+                style={{
+                  ...styles.flex,
+                  ...styles.direction,
+                  height: sc375(30),
+                }}
+              >
+                <Image
+                  resizeMode="contain"
+                  source={{ uri: o?.img_url }}
+                  style={styles.item}
+                />
+              </View>
+            </Pressable>
           );
         })
     : null;
